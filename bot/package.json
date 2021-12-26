@@ -1,0 +1,15 @@
+{
+  "name": "quag-says-trans-rights",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord": "^0.8.2",
+    "discord.js": "^13.3.1"
+  }
+}
