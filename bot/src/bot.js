@@ -167,7 +167,7 @@ let commands = {
             let huntail = message.guild.roles.cache.get("264410914592129025");
             let member = message.member
             //give the role
-            member.roles.add(quagdev).catch(console.error);
+            member.roles.add(args[1]).catch(console.error);
         }
     }
 }
