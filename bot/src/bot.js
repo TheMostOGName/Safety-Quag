@@ -3,13 +3,6 @@ let secrets = require('./secrets.json');
 // secrets.json contains the bot's token. This is the only file that has been modified from the version that is actually used. 
 let random = require('./rand.json')
 const Discord = require('discord.js');
-//get icon roles by ID
-let wooper = message.guild.roles.cache.find(role => role.name === "Wonderful Woopers");
-let quag = message.guild.roles.cache.cache.find(role => role.name === "Quite Quaggers");
-let sandshrew = message.guild.roles.cache.find(role => role.name === "Sandshrew Appreciator");
-let lotad = message.guild.roles.cache.find(role => role.name === "Legendary Lotads");
-let huntail = message.guild.roles.cache.find(role => role.name === "Happy Huntails");
-
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
 
 //A list of all the commands, their descriptions, what to do when someone runs them, ect. 
@@ -148,7 +141,7 @@ let commands = {
     },
     "exit": {
         "desc": "Closes bot, staff only",
-        "f": function(msg, args) {
+        "f": function(msg, args, ) {
             if (msg.member.roles.cache.some(role => role.id == "402227288285904907") ||
                 msg.author.id == "730177830201196585") {
                 process.exit();
@@ -164,8 +157,15 @@ let commands = {
     },
     "getrole": {
         "desc": "Get Icon Roles!",
-        "f": function (msg, args) {
+        "f": function (message, args) {
+            //get icon roles by ID
+            let wooper = message.guild.roles.cache.find(role => role.name === "Wonderful Woopers");
+            let quag = message.guild.roles.cache.cache.find(role => role.name === "Quite Quaggers");
+            let sandshrew = message.guild.roles.cache.find(role => role.name === "Sandshrew Appreciator");
+            let lotad = message.guild.roles.cache.find(role => role.name === "Legendary Lotads");
+            let huntail = message.guild.roles.cache.find(role => role.name === "Happy Huntails");
             let member = message.member
+            //give the role
             member.roles.add(args[1]).catch(console.error);
         }
     }
