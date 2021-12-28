@@ -80,7 +80,7 @@ let commands = {
     "code": {
         "desc": "Shows source code of bot",
         "f": function(msg, args) {
-            msg.channel.send("<:quagheart:925458903402176602> Hiya! Thanks for checking out the source code!! Here's the link:\n    <https://github.com/TheMostOGName/Safety-Quag/>");
+            msg.channel.send("<:quagheart:925458036737327184> Hiya! Thanks for checking out the source code!! Here's the link:\n    <https://github.com/TheMostOGName/Safety-Quag/>");
         }
     },
 
@@ -94,8 +94,8 @@ let commands = {
                         .setColor('#ef45e0')
                         .setTitle('Socials')
                         .addFields(
-                            { name: '­', value: '<:youtube:925458903402176602> [Youtube/Noari](https://www.youtube.com/channel/UCHVJeoHt12HYn-7fflLM-tg)' },
-                            { name: '­' , value: '<:github:925458903402176602> [Github/tobifx0](https://github.com/tobifx0)'}
+                            { name: '­', value: '<:youtube:925457989954072636> [Youtube/Noari](https://www.youtube.com/channel/UCHVJeoHt12HYn-7fflLM-tg)' },
+                            { name: '­' , value: '<:github:925458037223862322> [Github/tobifx0](https://github.com/tobifx0)'}
                         )
                 ]
             });
@@ -159,7 +159,7 @@ let commands = {
 }
 
 function error(e) {
-    client.channels.cache.get(data.bugreport_channel).send(`oh god something broke: <:quagfire:925458903402176602>\n\`\`\`diff\n+ Unhandled exception: \n-    ${e.toString().replace(/\n/g, "\n- ")}\`\`\`\n     <:madsire:925458903402176602> <@730177830201196585> pls fix`);
+    client.channels.cache.get(data.bugreport_channel).send(`oh god something broke: <:quagfire:925458036762484766>\n\`\`\`diff\n+ Unhandled exception: \n-    ${e.toString().replace(/\n/g, "\n- ")}\`\`\`\n     <:madsire:925458037056098424> <@730177830201196585> pls fix`);
 }
 
 //Error messages + other QoL
@@ -174,7 +174,7 @@ client.on('messageCreate', message => {
         if (!message.content.startsWith(data.prefix)) return;
         
         if (!data.allowed_channels.includes(message.channel.id)) {
-            message.react("<:wut:925458903402176602>");
+            message.react("<:wut:925458036733145180>");
             return;
         }
     
@@ -200,17 +200,17 @@ client.on('messageCreate', message => {
     
         console.log(args);
         if (commands[args[0]] === undefined) {
-            message.channel.send("<:wut:925458903402176602> that isn't a command (type `help` for help)");
+            message.channel.send("<:wut:925458036733145180> that isn't a command (type `help` for help)");
             return;
         }
     
         try {
             commands[args[0]].f(message, args);
         } catch (e) {
-            message.channel.send(`oh god something broke: <:quagfire:925458903402176602>\n\`\`\`diff\n+ Unhandled exception while executing “${args[0]}”: \n-    ${e.toString().replace(/\n/g, "\n- ")}\`\`\`\n ${args[0] != "error" ? "<:madsire:925458903402176602> <@730177830201196585> pls fix" : ""}`)
+            message.channel.send(`oh god something broke: <:quagfire:925458036762484766>\n\`\`\`diff\n+ Unhandled exception while executing “${args[0]}”: \n-    ${e.toString().replace(/\n/g, "\n- ")}\`\`\`\n ${args[0] != "error" ? "<:madsire:925458037056098424> <@730177830201196585> pls fix" : ""}`)
         }
     } catch (e) {
-        client.channels.cache.get(data.bugreport_channel).send(`oh god something broke: <:quagfire:925458903402176602>\n\`\`\`diff\n+ Unhandled exception while executing “events.messageCreate”: \n-    ${e.toString().replace(/\n/g, "\n- ")}\`\`\`\n     <:madsire:925458903402176602> <@730177830201196585> pls fix`);
+        client.channels.cache.get(data.bugreport_channel).send(`oh god something broke: <:quagfire:925458036762484766>\n\`\`\`diff\n+ Unhandled exception while executing “events.messageCreate”: \n-    ${e.toString().replace(/\n/g, "\n- ")}\`\`\`\n     <:madsire:925458037056098424> <@730177830201196585> pls fix`);
     }
 });
 
