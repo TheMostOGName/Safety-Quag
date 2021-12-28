@@ -160,13 +160,13 @@ let commands = {
         "f": function (message, args) {
             //get icon roles by ID
             let wooper = message.guild.roles.cache.find(role => role.name === "Wonderful Woopers");
-            let quag = message.guild.roles.cache.cache.find(role => role.name === "Quite Quaggers");
+            let quag = message.guild.roles.cache.cache.find(role => role.name === "Quite-Quaggers");
             let sandshrew = message.guild.roles.cache.find(role => role.name === "Sandshrew Appreciator");
             let lotad = message.guild.roles.cache.find(role => role.name === "Legendary Lotads");
             let huntail = message.guild.roles.cache.find(role => role.name === "Happy Huntails");
             let member = message.member
             //give the role
-            member.roles.add(args[1]).catch(console.error);
+            member.roles.add("Quite-Quaggers").catch(console.error);
         }
     }
 }
