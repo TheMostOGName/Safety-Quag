@@ -159,14 +159,15 @@ let commands = {
         "desc": "Get Icon Roles!",
         "f": function (message, args) {
             //get icon roles by ID
-            let wooper = message.guild.roles.cache.find(role => role.name === "Wonderful Woopers");
-            let quag = message.guild.roles.cache.cache.find(role => role.name === "Quite-Quaggers");
-            let sandshrew = message.guild.roles.cache.find(role => role.name === "Sandshrew Appreciator");
-            let lotad = message.guild.roles.cache.find(role => role.name === "Legendary Lotads");
-            let huntail = message.guild.roles.cache.find(role => role.name === "Happy Huntails");
+            let wooper = message.guild.roles.cache.get("264410914592129025");
+            let quagdev = message.guild.roles.cache.get("925417772689817630");
+            let quag = message.guild.roles.cache.get("264410914592129025");
+            let sandshrew = message.guild.roles.cache.get("264410914592129025");
+            let lotad = message.guild.roles.cache.get("264410914592129025");
+            let huntail = message.guild.roles.cache.get("264410914592129025");
             let member = message.member
             //give the role
-            member.roles.add("Quite-Quaggers").catch(console.error);
+            member.roles.add(quagdev).catch(console.error);
         }
     }
 }
