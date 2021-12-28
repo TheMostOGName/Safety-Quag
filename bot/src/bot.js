@@ -154,7 +154,7 @@ let commands = {
         "f": function(msg, args) {
             msg.channel.send("Thank u kenorbs/bonkers for server! :D")
         }
-    },
+    } /* ,
     "getrole": {
         "desc": "Get Icon Roles!",
         "f": function (message, args) {
@@ -167,9 +167,9 @@ let commands = {
             let huntail = message.guild.roles.cache.get("264410914592129025");
             let member = message.member
             //give the role
-            member.roles.add(args[1]).catch(console.error);
+            member.roles.add(args).catch(console.error);
         }
-    }
+    } */
 }
 
 function error(e) {
