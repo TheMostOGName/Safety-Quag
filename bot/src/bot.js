@@ -223,28 +223,50 @@ client.on('messageCreate', message => {
 client.on('messageDelete', message => {
     console.log(message.content);
     console.log(message.attachments);
-    // console.log(message.attachments[0].proxyURL);
+
     // Turn empty messages (like only a picture) into the phrase <empty message> to prevent errors
     if (message.content == "") {
         message.content = "<empty message>"
     };
-
-    try {
-        if (message.guild.id != data.modlog_server) return;
+    
+    // Send attachments as a separate message
+    message.attachments.forEach(attachment => {
+        var Attach = attachment.attachment
+        console.log(Attach)
+        try {
+            if (message.guild.id != data.modlog_server) return;
+            
+            client.channels.cache.get(data.modlog_channel).send({
+                "embeds": [
+                    new Discord.MessageEmbed()
+                        .setThumbnail(Attach !== undefined ? Attach : "")
+                        .setTitle("Deleted message:")
+                        .addField("Info", `Author: <@${message.author.id}> (${message.author.id})`),           
+                ]
+            });
+        } 
+         catch (e) {
+            error(e);
+        }
+    });
         
-        client.channels.cache.get(data.modlog_channel).send({
-            "embeds": [
-                new Discord.MessageEmbed()
-                    .setThumbnail(message.attachments[0])
-                    .setTitle("Deleted message:")
-                    .addField("Content", message.content, false)
-                    .addField("Info", `Author: <@${message.author.id}> (${message.author.id})`),           
-            ]
-        });
-    } catch (e) {
-        error(e);
-    }
+    
+        try {
+            if (message.guild.id != data.modlog_server) return;
+            
+            client.channels.cache.get(data.modlog_channel).send({
+                "embeds": [
+                    new Discord.MessageEmbed()
+                        .setTitle("Deleted message:")
+                        .addField("Content", message.content, false)
+                        .addField("Info", `Author: <@${message.author.id}> (${message.author.id})`),           
+                ]
+            });
+        } catch (e) {
+        //    error(e);
+        }
 });
+
 
 //Logging system for editted messages
 client.on('messageUpdate', (oldmessage, newmessage) => {
@@ -255,7 +277,7 @@ client.on('messageUpdate', (oldmessage, newmessage) => {
     }
 
     if (newmessage.content == "") {
-        oldmessage.content = "<empty message>"
+        newmessage.content = "<empty message>"
     }
 
     try {
