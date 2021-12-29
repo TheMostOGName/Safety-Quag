@@ -232,8 +232,8 @@ client.on('messageCreate', message => {
 client.on('messageDelete', message => {
     console.log(message.content);
     // Turn empty messages (like only a picture) into the phrase <empty message> to prevent errors
-    if (message.content == null) {
-        console.log("Code Says Null");
+    if (message.content == "") {
+        console.log("Code Says Nothing");
         client.channels.cache.get(data.modlog_channel).send({
             "embeds": [
                 new Discord.MessageEmbed()
@@ -267,7 +267,7 @@ client.on('messageDelete', message => {
 client.on('messageUpdate', (oldmessage, newmessage) => {
 
     // Turn empty messages (like only a picture) into the phrase <empty message> to prevent errors. The following code is extremely gross and I'm sorry
-    if (oldmessage.content == null && newmessage.content == null) {
+    if (oldmessage.content == "" && newmessage.content == "") {
         client.channels.cache.get(data.modlog_channel).send({
             "embeds": [
                 new Discord.MessageEmbed()
@@ -280,7 +280,7 @@ client.on('messageUpdate', (oldmessage, newmessage) => {
         });
     };
     
-    if (oldmessage.content == null) {
+    if (oldmessage.content == "") {
         client.channels.cache.get(data.modlog_channel).send({
             "embeds": [
                 new Discord.MessageEmbed()
@@ -292,7 +292,7 @@ client.on('messageUpdate', (oldmessage, newmessage) => {
             ]
         });
     };
-    if (newmessage.content == null) {
+    if (newmessage.content == "") {
         client.channels.cache.get(data.modlog_channel).send({
             "embeds": [
                 new Discord.MessageEmbed()
