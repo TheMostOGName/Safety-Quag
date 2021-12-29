@@ -223,6 +223,7 @@ client.on('messageCreate', message => {
 client.on('messageDelete', message => {
     console.log(message.content);
     console.log(message.attachments);
+    console.log(message.attachments.attachment);
     // Turn empty messages (like only a picture) into the phrase <empty message> to prevent errors
     if (message.content == "") {
         message.content = "<empty message>"
@@ -234,7 +235,7 @@ client.on('messageDelete', message => {
         client.channels.cache.get(data.modlog_channel).send({
             "embeds": [
                 new Discord.MessageEmbed()
-                    .setThumbnail(message.attachments[0])
+                    .setThumbnail(message.attachments.attachment[0])
                     .setTitle("Deleted message:")
                     .addField("Content", message.content, false)
                     .addField("Info", `Author: <@${message.author.id}> (${message.author.id})`),           
