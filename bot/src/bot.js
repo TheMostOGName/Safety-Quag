@@ -145,23 +145,82 @@ let commands = {
         "f": function(msg, args) {
             msg.channel.send("Thank u kenorbs/bonkers for server! :D")
         }
-    } /* ,
-    "getrole": {
-        "desc": "Get Icon Roles!",
+    },
+    "get-role": {
+        "desc": "Get Icon Roles! Avaliable roles: Wooper, Quag, Sandshrew, Lotad, Huntail",
         "f": function (message, args) {
+            console.log(args[1])
             //get icon roles by ID
-            let wooper = message.guild.roles.cache.get("264410914592129025");
+            let wooper = message.guild.roles.cache.get("904105130151006269");
             let quagdev = message.guild.roles.cache.get("925417772689817630");
-            let quag = message.guild.roles.cache.get("264410914592129025");
-            let sandshrew = message.guild.roles.cache.get("264410914592129025");
-            let lotad = message.guild.roles.cache.get("264410914592129025");
-            let huntail = message.guild.roles.cache.get("264410914592129025");
+            let quag = message.guild.roles.cache.get("904634145899151410");
+            let sandshrew = message.guild.roles.cache.get("893012538705453087");
+            let lotad = message.guild.roles.cache.get("904634350455382037");
+            let huntail = message.guild.roles.cache.get("904634480579452928");
             let member = message.member
+
+            if (args[1] == "wooper") {
+                var role = wooper;
+            } else {
+            if (args[1] == "quag") {
+                var role = quag;
+            } else {
+            if (args[1] == "sandshrew") {
+                var role = sandshrew;
+            } else {
+            if (args[1] == "lotad") {
+                var role = lotad;
+            } else {
+            if (args[1] == "huntail") {
+                var role = huntail;
+            } else {
+            var role = null; 
+            }}}}};
             //give the role
-            member.roles.add(args).catch(console.error);
+            member.roles.add(role).catch(console.error);
+            //reset the role value
+            var role = null; 
+            console.log(role);
         }
-    } */
-}
+    },
+        "remove-role": {
+            "desc": "Remove your Icon Roles!",
+            "f": function (message, args) {
+                console.log(args[1])
+                //get icon roles by ID
+                let wooper = message.guild.roles.cache.get("904105130151006269");
+                let quagdev = message.guild.roles.cache.get("925417772689817630");
+                let quag = message.guild.roles.cache.get("904634145899151410");
+                let sandshrew = message.guild.roles.cache.get("893012538705453087");
+                let lotad = message.guild.roles.cache.get("904634350455382037");
+                let huntail = message.guild.roles.cache.get("904634480579452928");
+                let member = message.member
+    
+                if (args[1] == "wooper") {
+                    var role = wooper;
+                } else {
+                if (args[1] == "quag") {
+                    var role = quag;
+                } else {
+                if (args[1] == "sandshrew") {
+                    var role = sandshrew;
+                } else {
+                if (args[1] == "lotad") {
+                    var role = lotad;
+                } else {
+                if (args[1] == "huntail") {
+                    var role = huntail;
+                } else {
+                var role = null; 
+                }}}}};
+                //give the role
+                member.roles.remove(role).catch(console.error);
+                //reset the role value
+                var role = null; 
+                console.log(role);
+        }   
+    }
+} 
 
 function error(e) {
     client.channels.cache.get(data.bugreport_channel).send(`oh god something broke: <:quagfire:925458036762484766>\n\`\`\`diff\n+ Unhandled exception: \n-    ${e.toString().replace(/\n/g, "\n- ")}\`\`\`\n     <:madsire:925458037056098424> <@730177830201196585> pls fix`);
