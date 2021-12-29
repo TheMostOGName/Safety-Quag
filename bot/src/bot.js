@@ -238,7 +238,7 @@ client.on('messageDelete', message => {
                     .addField("Info", `Author: <@${message.author.id}> (${message.author.id})`),
                 new Discord.MessageEmbed ()
                     .setTitle("Attatchments:")
-                    .addField(message.attachments[0], false, false)
+                    .addField(`Attachment: ${message.attachments[0]}`)
               ]
         });
     } catch (e) {
