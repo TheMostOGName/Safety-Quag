@@ -230,10 +230,18 @@ client.on('messageCreate', message => {
 
 //Logging system for deleted messages
 client.on('messageDelete', message => {
-    let msg = message.content;
     // Turn empty messages (like only a picture) into the phrase <empty message> to prevent errors
-    if (message.content = null) {
-        message.content = "<empty text>"
+    if (message.content == null) {
+        client.channels.cache.get(data.modlog_channel).send({
+            "embeds": [
+                new Discord.MessageEmbed()
+                    .setTitle("Deleted message:")
+                    .addField("Content", "<empty message>", false)
+                    .addField("Info", `Author: <@${message.author.id}> (${message.author.id})`)
+                    .setThumbnail(message.attachments[0] !== undefined ? message.attachments[0] : ""),
+            ]
+        });
+        return
     };
     console.log(message.content);
     try {
@@ -256,12 +264,43 @@ client.on('messageDelete', message => {
 //Logging system for editted messages
 client.on('messageUpdate', (oldmessage, newmessage) => {
 
-    // Turn empty messages (like only a picture) into the phrase <empty message> to prevent errors
-    if (oldmessage.content = null) {
-        oldmessage.content = "<empty message>"
+    // Turn empty messages (like only a picture) into the phrase <empty message> to prevent errors. The following code is extremely gross and I'm sorry
+    if (oldmessage.content == null && newmessage.content == null) {
+        client.channels.cache.get(data.modlog_channel).send({
+            "embeds": [
+                new Discord.MessageEmbed()
+                    .setTitle("Edited message:")
+                    .addField("Old", "<empty message>", false)
+                    .addField("New", "<empty message>", false)
+                    .addField("Info", `Author: <@${newmessage.author.id}> (${newmessage.author.id}), [link](${newmessage.url})`)
+                    .setThumbnail(newmessage.attachments[0] !== undefined ? newmessage.attachments[0] : ""),
+            ]
+        });
     };
-    if (newmessage.content = null) {
-        newmessage.content = "<empty message>"
+    
+    if (oldmessage.content == null) {
+        client.channels.cache.get(data.modlog_channel).send({
+            "embeds": [
+                new Discord.MessageEmbed()
+                    .setTitle("Edited message:")
+                    .addField("Old", "<empty message>", false)
+                    .addField("New", newmessage.content, false)
+                    .addField("Info", `Author: <@${newmessage.author.id}> (${newmessage.author.id}), [link](${newmessage.url})`)
+                    .setThumbnail(newmessage.attachments[0] !== undefined ? newmessage.attachments[0] : ""),
+            ]
+        });
+    };
+    if (newmessage.content == null) {
+        client.channels.cache.get(data.modlog_channel).send({
+            "embeds": [
+                new Discord.MessageEmbed()
+                    .setTitle("Edited message:")
+                    .addField("Old", oldmessage.content, false)
+                    .addField("New", "<empty message>", false)
+                    .addField("Info", `Author: <@${newmessage.author.id}> (${newmessage.author.id}), [link](${newmessage.url})`)
+                    .setThumbnail(newmessage.attachments[0] !== undefined ? newmessage.attachments[0] : ""),
+            ]
+        });
     };
     try {
         if (oldmessage.content == newmessage.content) return;    
