@@ -235,6 +235,8 @@ client.on('messageDelete', message => {
     if (msg = null) {
         msg = "<empty text>"
     }
+    console.log(msg);
+    console.log(message.content);
     try {
         if (message.guild.id != data.modlog_server) return;
         
