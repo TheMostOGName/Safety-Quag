@@ -235,9 +235,8 @@ client.on('messageDelete', message => {
                 new Discord.MessageEmbed()
                     .setTitle("Deleted message:")
                     .addField("Content", message.content, false)
-                    .addField("Info", `Author: <@${message.author.id}> (${message.author.id})`),
-                new Discord.Message()
-                    .setContent(message.attachments[0])
+                    .addField("Info", `Author: <@${message.author.id}> (${message.author.id})`)
+                    .setThumbnail(message.attachments[0]),           
             ]
         });
     } catch (e) {
