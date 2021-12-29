@@ -238,8 +238,8 @@ client.on('messageDelete', message => {
                     .addField("Info", `Author: <@${message.author.id}> (${message.author.id})`),
                 new Discord.MessageEmbed ()
                     .setTitle("Attatchments:")
-                    .setThumbnail(message.attachments[0] !== undefined ? message.attachments[0] : ""),
-            ]
+                    .addField(message.attachments[0], false, false)
+              ]
         });
     } catch (e) {
         error(e);
