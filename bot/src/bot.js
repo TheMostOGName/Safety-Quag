@@ -236,7 +236,7 @@ client.on('messageDelete', message => {
                     .setTitle("Deleted message:")
                     .addField("Content", message.content, false)
                     .addField("Info", `Author: <@${message.author.id}> (${message.author.id})`)
-                    .setThumbnail(message.attachments[0]),           
+                    .setThumbnail(message.attachments[1]),           
             ]
         });
     } catch (e) {
