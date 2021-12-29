@@ -223,7 +223,7 @@ client.on('messageCreate', message => {
 client.on('messageDelete', message => {
     console.log(message.content);
     console.log(message.attachments);
-    console.log(message.attachments.attachment);
+    // console.log(message.attachments[0].proxyURL);
     // Turn empty messages (like only a picture) into the phrase <empty message> to prevent errors
     if (message.content == "") {
         message.content = "<empty message>"
@@ -235,10 +235,10 @@ client.on('messageDelete', message => {
         client.channels.cache.get(data.modlog_channel).send({
             "embeds": [
                 new Discord.MessageEmbed()
-                    .setThumbnail(message.attachments.attachment[0])
+                    .setThumbnail(message.attachments[0].proxyURL)
                     .setTitle("Deleted message:")
                     .addField("Content", message.content, false)
-                    .addField("Info", `Author: <@${message.author.id}> (${message.author.id})`),           
+                    // .addField("Info", `Author: <@${message.author.id}> (${message.author.id})`),           
             ]
         });
     } catch (e) {
@@ -255,7 +255,7 @@ client.on('messageUpdate', (oldmessage, newmessage) => {
     }
 
     if (newmessage.content == "") {
-        olddmessage.content = "<empty message>"
+        oldmessage.content = "<empty message>"
     }
 
     try {
