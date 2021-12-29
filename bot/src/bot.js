@@ -229,12 +229,12 @@ client.on('messageCreate', message => {
 });
 
 //Logging system for deleted messages
-let msg = message.content;
-// Turn empty messages (like only a picture) into the phrase <empty message> to prevent errors
-if (msg = null) {
-    msg = "<empty text>"
-}
 client.on('messageDelete', message => {
+    let msg = message.content;
+    // Turn empty messages (like only a picture) into the phrase <empty message> to prevent errors
+    if (msg = null) {
+        msg = "<empty text>"
+    }
     try {
         if (message.guild.id != data.modlog_server) return;
         
