@@ -225,46 +225,70 @@ client.on('messageDelete', message => {
     console.log(message.attachments);
 
     // Turn empty messages (like only a picture) into the phrase <empty message> to prevent errors
-    if (message.content == "") {
+`    if (message.content == "") {
         message.content = "<empty message>"
-    };
-    
-    // Send attachments as a separate message
+    };`
+
+    if (message.attachments != {}) {
+        if (message.content != "") {
+            try {
+                if (message.guild.id != data.modlog_server) return;
+                
+                client.channels.cache.get(data.modlog_channel).send({
+                    "embeds": [
+                        new Discord.MessageEmbed()
+                            .setTitle("Deleted message:")
+                            .addField("Content", message.content, false)
+                            .addField("Info", `Author: <@${message.author.id}> (${message.author.id})`),           
+                    ]
+                });
+            } catch (e) {
+                error(e);
+            }
+        }
+    }
+
+    // Send attachments
     message.attachments.forEach(attachment => {
         var Attach = attachment.attachment
         console.log(Attach)
-        try {
-            if (message.guild.id != data.modlog_server) return;
-            
-            client.channels.cache.get(data.modlog_channel).send({
-                "embeds": [
-                    new Discord.MessageEmbed()
-                        .setThumbnail(Attach !== undefined ? Attach : "")
-                        .setTitle("Deleted message:")
-                        .addField("Info", `Author: <@${message.author.id}> (${message.author.id})`),           
-                ]
-            });
+
+        if (Attach != {}) {
+            if (message.content == "") {
+                try {
+                    if (message.guild.id != data.modlog_server) return;
+                    
+                    client.channels.cache.get(data.modlog_channel).send({
+                        "embeds": [
+                            new Discord.MessageEmbed()
+                                .setThumbnail(Attach !== undefined ? Attach : "")
+                                .setTitle("Deleted message:")
+                                .addField("Info", `Author: <@${message.author.id}> (${message.author.id})`),           
+                        ]
+                    });
+                } 
+                catch (e) {
+                    error(e);
+                }
+            } else {
+                try {
+                    if (message.guild.id != data.modlog_server) return;
+                    
+                    client.channels.cache.get(data.modlog_channel).send({
+                        "embeds": [
+                            new Discord.MessageEmbed()
+                                .setThumbnail(Attach !== undefined ? Attach : "")
+                                .setTitle("Deleted message:")
+                                .addField("Content", message.content, false)
+                                .addField("Info", `Author: <@${message.author.id}> (${message.author.id})`),           
+                        ]
+                    });
+                } catch (e) {
+                    error(e);
+                }
+            }
         } 
-         catch (e) {
-            error(e);
-        }
     });
-        
-    
-        try {
-            if (message.guild.id != data.modlog_server) return;
-            
-            client.channels.cache.get(data.modlog_channel).send({
-                "embeds": [
-                    new Discord.MessageEmbed()
-                        .setTitle("Deleted message:")
-                        .addField("Content", message.content, false)
-                        .addField("Info", `Author: <@${message.author.id}> (${message.author.id})`),           
-                ]
-            });
-        } catch (e) {
-        //    error(e);
-        }
 });
 
 
