@@ -230,8 +230,10 @@ client.on('messageCreate', message => {
 
 //Logging system for deleted messages
 client.on('messageDelete', message => {
+    console.log(message.content);
     // Turn empty messages (like only a picture) into the phrase <empty message> to prevent errors
     if (message.content == null) {
+        console.log("Code Says Null");
         client.channels.cache.get(data.modlog_channel).send({
             "embeds": [
                 new Discord.MessageEmbed()
@@ -243,7 +245,7 @@ client.on('messageDelete', message => {
         });
         return
     };
-    console.log(message.content);
+
     try {
         if (message.guild.id != data.modlog_server) return;
         
