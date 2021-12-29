@@ -258,10 +258,10 @@ client.on('messageUpdate', (oldmessage, newmessage) => {
 
     // Turn empty messages (like only a picture) into the phrase <empty message> to prevent errors
     if (oldmessage.content = null) {
-        let oldmessage.content = "<empty message>"
+        oldmessage.content = "<empty message>"
     };
     if (newmessage.content = null) {
-        let newmessage.content = "<empty message>"
+        newmessage.content = "<empty message>"
     };
     try {
         if (oldmessage.content == newmessage.content) return;    
