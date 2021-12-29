@@ -87,16 +87,7 @@ let commands = {
         "desc": "Info about who made this",
         "f": function(msg, args) {
             msg.channel.send({
-                "content": "Hiya! I'm Safetyquag, and I was originally made by Tobi(snowbi). I am now run and developed by Kenorbs. Ask Kenorbs about any inquires about me you may have, NOT tobi. My code can be found by running `code`. Here are Tobi's socials:",
-                "embeds": [
-                    new Discord.MessageEmbed()
-                        .setColor('#ef45e0')
-                        .setTitle('Socials')
-                        .addFields(
-                            { name: '­', value: '<:youtube:925457989954072636> [Youtube/Noari](https://www.youtube.com/channel/UCHVJeoHt12HYn-7fflLM-tg)' },
-                            { name: '­' , value: '<:github:925458037223862322> [Github/tobifx0](https://github.com/tobifx0)'}
-                        )
-                ]
+                "content": "Hiya! I'm Safetyquag, and I'm run and developed by Kenorbs. If you have any comments, questions, or concerns, ask Kenorbs! My code can be found by running `code`.",
             });
         }
     },
@@ -233,17 +224,7 @@ client.on('messageDelete', message => {
     console.log(message.content);
     // Turn empty messages (like only a picture) into the phrase <empty message> to prevent errors
     if (message.content == "") {
-        console.log("Code Says Nothing");
-        client.channels.cache.get(data.modlog_channel).send({
-            "embeds": [
-                new Discord.MessageEmbed()
-                    .setTitle("Deleted message:")
-                    .addField("Content", "<empty message>", false)
-                    .addField("Info", `Author: <@${message.author.id}> (${message.author.id})`)
-                    .setThumbnail(message.attachments[0] !== undefined ? message.attachments[0] : ""),
-            ]
-        });
-        return
+        message.content = "<empty message>"
     };
 
     try {
@@ -254,7 +235,8 @@ client.on('messageDelete', message => {
                 new Discord.MessageEmbed()
                     .setTitle("Deleted message:")
                     .addField("Content", message.content, false)
-                    .addField("Info", `Author: <@${message.author.id}> (${message.author.id})`)
+                    .addField("Info", `Author: <@${message.author.id}> (${message.author.id})`),
+                new Discord.MessageEmbed ()
                     .setThumbnail(message.attachments[0] !== undefined ? message.attachments[0] : ""),
             ]
         });
@@ -267,43 +249,14 @@ client.on('messageDelete', message => {
 client.on('messageUpdate', (oldmessage, newmessage) => {
 
     // Turn empty messages (like only a picture) into the phrase <empty message> to prevent errors. The following code is extremely gross and I'm sorry
-    if (oldmessage.content == "" && newmessage.content == "") {
-        client.channels.cache.get(data.modlog_channel).send({
-            "embeds": [
-                new Discord.MessageEmbed()
-                    .setTitle("Edited message:")
-                    .addField("Old", "<empty message>", false)
-                    .addField("New", "<empty message>", false)
-                    .addField("Info", `Author: <@${newmessage.author.id}> (${newmessage.author.id}), [link](${newmessage.url})`)
-                    .setThumbnail(newmessage.attachments[0] !== undefined ? newmessage.attachments[0] : ""),
-            ]
-        });
-    };
-    
     if (oldmessage.content == "") {
-        client.channels.cache.get(data.modlog_channel).send({
-            "embeds": [
-                new Discord.MessageEmbed()
-                    .setTitle("Edited message:")
-                    .addField("Old", "<empty message>", false)
-                    .addField("New", newmessage.content, false)
-                    .addField("Info", `Author: <@${newmessage.author.id}> (${newmessage.author.id}), [link](${newmessage.url})`)
-                    .setThumbnail(newmessage.attachments[0] !== undefined ? newmessage.attachments[0] : ""),
-            ]
-        });
-    };
+        oldmessage.content = "<empty message>"
+    }
+
     if (newmessage.content == "") {
-        client.channels.cache.get(data.modlog_channel).send({
-            "embeds": [
-                new Discord.MessageEmbed()
-                    .setTitle("Edited message:")
-                    .addField("Old", oldmessage.content, false)
-                    .addField("New", "<empty message>", false)
-                    .addField("Info", `Author: <@${newmessage.author.id}> (${newmessage.author.id}), [link](${newmessage.url})`)
-                    .setThumbnail(newmessage.attachments[0] !== undefined ? newmessage.attachments[0] : ""),
-            ]
-        });
-    };
+        newmessage.content = "<empty message>"
+    }
+
     try {
         if (oldmessage.content == newmessage.content) return;    
         if (newmessage.guild.id != data.modlog_server) return;
