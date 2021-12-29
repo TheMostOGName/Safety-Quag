@@ -229,6 +229,11 @@ client.on('messageCreate', message => {
 });
 
 //Logging system for deleted messages
+let msg = message.content;
+// Turn empty messages (like only a picture) into the phrase <empty message> to prevent errors
+if (msg = null) {
+    msg = "<empty text>"
+}
 client.on('messageDelete', message => {
     try {
         if (message.guild.id != data.modlog_server) return;
@@ -237,7 +242,7 @@ client.on('messageDelete', message => {
             "embeds": [
                 new Discord.MessageEmbed()
                     .setTitle("Deleted message:")
-                    .addField("Content", message.content, false)
+                    .addField("Content", msg, false)
                     .addField("Info", `Author: <@${message.author.id}> (${message.author.id})`)
                     .setThumbnail(message.attachments[0] !== undefined ? message.attachments[0] : ""),
             ]
@@ -249,16 +254,26 @@ client.on('messageDelete', message => {
 
 //Logging system for editted messages
 client.on('messageUpdate', (oldmessage, newmessage) => {
+    let oldmsg = oldmessage.content;
+    let newmsg = newmessage.content;
+
+    // Turn empty messages (like only a picture) into the phrase <empty message> to prevent errors
+    if (oldmsg = null) {
+        let oldmsg = "<empty message>"
+    }
+    if (newmsg = null) {
+        let newmsg = "<empty message>"
+    }
     try {
-        if (oldmessage.content == newmessage.content) return;    
+        if (oldmsg == newmsg) return;    
         if (newmessage.guild.id != data.modlog_server) return;
         
         client.channels.cache.get(data.modlog_channel).send({
             "embeds": [
                 new Discord.MessageEmbed()
                     .setTitle("Edited message:")
-                    .addField("Old", oldmessage.content, false)
-                    .addField("New", newmessage.content, false)
+                    .addField("Old", oldmsg, false)
+                    .addField("New", newmsg, false)
                     .addField("Info", `Author: <@${newmessage.author.id}> (${newmessage.author.id}), [link](${newmessage.url})`)
                     .setThumbnail(newmessage.attachments[0] !== undefined ? newmessage.attachments[0] : ""),
             ]
