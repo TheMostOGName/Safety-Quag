@@ -236,10 +236,10 @@ client.on('messageDelete', message => {
                     .setTitle("Deleted message:")
                     .addField("Content", message.content, false)
                     .addField("Info", `Author: <@${message.author.id}> (${message.author.id})`),
-                new Discord.MessageEmbed ()
-                    .setTitle("Attatchments:")
-                    .addField(`Attachment: ${message.attachments[0]}`)
-              ]
+                new Discord.MessageEmbed()
+                .setTitle("Attachments:")
+                    .setThumbnail(message.attachments[0] !== undefined ? message.attachments[0] : ""),           
+            ]
         });
     } catch (e) {
         error(e);
@@ -255,7 +255,7 @@ client.on('messageUpdate', (oldmessage, newmessage) => {
     }
 
     if (newmessage.content == "") {
-        newmessage.content = "<empty message>"
+        olddmessage.content = "<empty message>"
     }
 
     try {
