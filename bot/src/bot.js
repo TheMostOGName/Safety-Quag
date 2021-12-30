@@ -159,8 +159,16 @@ let commands = {
             if (args[1] == "Huntail") {
                 var role = huntail;
             } else {
+            if (args[1] == "Overlord") {
+                message.channel.send("Imagine not having Overlord :sunglasses:", {tts: true});
+                var role = Overlord;
+            } else {
             var role = null; 
-            }}}}};
+            }}}}}};
+
+            if (role == null) {
+                message.channel.send("Sorry, this is not a valid role.");
+            }
             //give the role
             member.roles.add(role).catch(console.error);
             //reset the role value
@@ -198,6 +206,10 @@ let commands = {
                 } else {
                 var role = null; 
                 }}}}};
+
+                if (role == null) {
+                    message.channel.send("Sorry, this is not a valid role.");
+                }
                 //give the role
                 member.roles.remove(role).catch(console.error);
                 //reset the role value
