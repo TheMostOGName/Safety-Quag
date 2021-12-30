@@ -235,7 +235,7 @@ client.on('messageCreate', message => {
         }
     
         if (message.author.bot) return;
-        if (!message.content.startsWith(data.prefix)) return;
+        if (!message.content.startsWith(forEach(data.prefix))) return;
         
         if (!data.allowed_channels.includes(message.channel.id)) {
             message.react("<:wut:925458036733145180>");
