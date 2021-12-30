@@ -144,19 +144,19 @@ let commands = {
             let huntail = message.guild.roles.cache.get("904634480579452928");
             let member = message.member
 
-            if (args[1] == "wooper") {
+            if (args[1] == "Wooper") {
                 var role = wooper;
             } else {
-            if (args[1] == "quag") {
+            if (args[1] == "Quag") {
                 var role = quag;
             } else {
-            if (args[1] == "sandshrew") {
+            if (args[1] == "Sandshrew") {
                 var role = sandshrew;
             } else {
-            if (args[1] == "lotad") {
+            if (args[1] == "Lotad") {
                 var role = lotad;
             } else {
-            if (args[1] == "huntail") {
+            if (args[1] == "Huntail") {
                 var role = huntail;
             } else {
             var role = null; 
@@ -181,19 +181,19 @@ let commands = {
                 let huntail = message.guild.roles.cache.get("904634480579452928");
                 let member = message.member
     
-                if (args[1] == "wooper") {
+                if (args[1] == "Wooper") {
                     var role = wooper;
                 } else {
-                if (args[1] == "quag") {
+                if (args[1] == "Quag") {
                     var role = quag;
                 } else {
-                if (args[1] == "sandshrew") {
+                if (args[1] == "Sandshrew") {
                     var role = sandshrew;
                 } else {
-                if (args[1] == "lotad") {
+                if (args[1] == "Lotad") {
                     var role = lotad;
                 } else {
-                if (args[1] == "huntail") {
+                if (args[1] == "Huntail") {
                     var role = huntail;
                 } else {
                 var role = null; 
