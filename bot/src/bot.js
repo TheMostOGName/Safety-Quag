@@ -121,15 +121,6 @@ let commands = {
 
     },
 
-    "reload": {
-        "desc": "Pulls code, reloads bot, Tobi only",
-        "f": function(msg, args) {
-            if (msg.author.id == "730177830201196585") {
-                process.exitCode = 2;
-                process.exit(2);
-            }
-        }
-    },
     "exit": {
         "desc": "Closes bot, staff only",
         "f": function(msg, args, ) {
@@ -140,12 +131,6 @@ let commands = {
         }
     },
     
-    "bonkers": {
-        "desc": "you are cool",
-        "f": function(msg, args) {
-            msg.channel.send("Thank u kenorbs/bonkers for server! :D")
-        }
-    },
     "get-role": {
         "desc": "Get Icon Roles! Avaliable roles: Wooper, Quag, Sandshrew, Lotad, Huntail",
         "f": function (message, args) {
@@ -235,7 +220,7 @@ client.on('messageCreate', message => {
         }
     
         if (message.author.bot) return;
-        if (!message.content.startsWith(forEach(data.prefix))) return;
+        if (!message.content.startsWith(data.prefix)) return;
         
         if (!data.allowed_channels.includes(message.channel.id)) {
             message.react("<:wut:925458036733145180>");
