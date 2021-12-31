@@ -161,13 +161,17 @@ let commands = {
             } else {
             if (args[1] == "Overlord") {
                 message.channel.send("Imagine not having Overlord :sunglasses:", {tts: true});
-                var role = Overlord;
+                var check = "true";
             } else {
             var role = null; 
+            var check = null;
             }}}}}};
 
-            if (role == null) {
+            if (role == null && check != "true") {
                 message.channel.send("Sorry, this is not a valid role.");
+            }
+            if (role == "Overlord") {
+                return
             }
             //give the role
             member.roles.add(role).catch(console.error);
