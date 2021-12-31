@@ -144,19 +144,19 @@ let commands = {
             let huntail = message.guild.roles.cache.get("904634480579452928");
             let member = message.member
 
-            if (args[1] == "Wooper") {
+            if (args[1] == "Wooper" || args[1] == "wooper") {
                 var role = wooper;
             } else {
-            if (args[1] == "Quag") {
+            if (args[1] == "Quag" || args[1] == "quag") {
                 var role = quag;
             } else {
-            if (args[1] == "Sandshrew") {
+            if (args[1] == "Sandshrew" || args[1] == "sandshrew") {
                 var role = sandshrew;
             } else {
-            if (args[1] == "Lotad") {
+            if (args[1] == "Lotad" || args[1] == "lotad") {
                 var role = lotad;
             } else {
-            if (args[1] == "Huntail") {
+            if (args[1] == "Huntail" || args[1] == "huntail") {
                 var role = huntail;
             } else {
             if (args[1] == "Overlord") {
@@ -193,19 +193,19 @@ let commands = {
                 let huntail = message.guild.roles.cache.get("904634480579452928");
                 let member = message.member
     
-                if (args[1] == "Wooper") {
+                if (args[1] == "Wooper" || args[1] == "wooper") {
                     var role = wooper;
                 } else {
-                if (args[1] == "Quag") {
+                if (args[1] == "Quag" || args[1] == "quag") {
                     var role = quag;
                 } else {
-                if (args[1] == "Sandshrew") {
+                if (args[1] == "Sandshrew" || args[1] == "sandshrew") {
                     var role = sandshrew;
                 } else {
-                if (args[1] == "Lotad") {
+                if (args[1] == "Lotad" || args[1] == "lotad") {
                     var role = lotad;
                 } else {
-                if (args[1] == "Huntail") {
+                if (args[1] == "Huntail" || args[1] == "huntail") {
                     var role = huntail;
                 } else {
                 var role = null; 
@@ -292,8 +292,6 @@ client.on('messageDelete', message => {
     if (message.attachments != {}) {
         if (message.content != "") {
             try {
-                if (message.guild.id != data.modlog_server) return;
-                
                 client.channels.cache.get(data.modlog_channel).send({
                     "embeds": [
                         new Discord.MessageEmbed()
@@ -315,9 +313,7 @@ client.on('messageDelete', message => {
 
         if (Attach != {}) {
             if (message.content == "") {
-                try {
-                    if (message.guild.id != data.modlog_server) return;
-                    
+                try {                    
                     client.channels.cache.get(data.modlog_channel).send({
                         "embeds": [
                             new Discord.MessageEmbed()
@@ -331,9 +327,7 @@ client.on('messageDelete', message => {
                     error(e);
                 }
             } else {
-                try {
-                    if (message.guild.id != data.modlog_server) return;
-                    
+                try {   
                     client.channels.cache.get(data.modlog_channel).send({
                         "embeds": [
                             new Discord.MessageEmbed()
@@ -366,7 +360,6 @@ client.on('messageUpdate', (oldmessage, newmessage) => {
 
     try {
         if (oldmessage.content == newmessage.content) return;    
-        if (newmessage.guild.id != data.modlog_server) return;
         
         client.channels.cache.get(data.modlog_channel).send({
             "embeds": [
