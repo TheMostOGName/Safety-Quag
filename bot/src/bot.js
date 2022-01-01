@@ -227,8 +227,8 @@ let commands = {
         }   
     },
 
-    "hack": {
-        "desc": "hack",
+    "matrix": {
+        "desc": "...",
         "f": function(message, args) {
             let member = message.member;
             let counter = 0
@@ -319,9 +319,9 @@ client.on('messageDelete', message => {
     console.log(message.attachments);
 
     // Turn empty messages (like only a picture) into the phrase <empty message> to prevent errors
-`    if (message.content == "") {
-        message.content = "<empty message>"
-    };`
+    // if (message.content == "") {
+    //     message.content = "<empty message>"
+    // };
 
     if (message.attachments != {}) {
         if (message.content != "") {
