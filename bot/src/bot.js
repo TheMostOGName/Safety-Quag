@@ -239,11 +239,15 @@ let commands = {
     "matrix": {
         "desc": "...",
         "f": function(message, args) {
+            let nani = Math.floor(Math.random() * 100);
             let member = message.member;
             console.log(member);
             console.log(counter);
 
             if (counter == 0) {
+                if (nani = 69) {
+                    message.channel.send(`Keananu Reaves`)
+                }
                 message.channel.send(`Wake up, ${member}...`);
                 counter++;
                 console.log(counter);
