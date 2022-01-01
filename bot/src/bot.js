@@ -231,7 +231,9 @@ let commands = {
         "desc": "...",
         "f": function(message, args) {
             let member = message.member;
-            let counter = 0
+            if (counter == undefined) {
+                var counter = 0
+            }
             console.log(member);
             console.log(counter);
 
