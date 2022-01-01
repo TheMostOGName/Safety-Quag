@@ -268,7 +268,13 @@ function error(e) {
 
 //Error messages + other QoL
 client.on('messageCreate', message => {
-    try {        
+    try {
+        // Code that would auto-delete scam links. Not going to be used, but I wanted to add it here because it might be useful to have.     
+        // data.scamlinks.forEach(link => {
+        // if (message.content.includes(link)) {
+        //     message.delete();
+        //     return;
+        //     }});
         if (message.content.indexOf("<@!919831853014339584>") != -1 ||
             message.content.indexOf("<@919831853014339584>") != -1) {
             message.react("<:ping:919094079302799373>");
