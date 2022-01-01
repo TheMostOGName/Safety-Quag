@@ -145,6 +145,7 @@ let commands = {
             let sandshrew = message.guild.roles.cache.get("893012538705453087");
             let lotad = message.guild.roles.cache.get("904634350455382037");
             let huntail = message.guild.roles.cache.get("904634480579452928");
+            let secretRole = message.guild.roles.cache.get("926950238252576808");
             let member = message.member
 
             if (args[1] == "Wooper" || args[1] == "wooper") {
@@ -166,9 +167,12 @@ let commands = {
                 message.channel.send("Imagine not having Overlord :sunglasses:", {tts: true});
                 var check = "true";
             } else {
+            if (args[1] == "Secret™") {
+                var role = secretRole;
+            } else {
             var role = null; 
             var check = null;
-            }}}}}};
+            }}}}}}};
 
             if (role == null && check != "true") {
                 message.channel.send("Sorry, this is not a valid role.");
@@ -178,8 +182,12 @@ let commands = {
             }
             //give the role
             member.roles.add(role).catch(console.error);
-            if (role != null) {
+            if (role != null && role != secretRole) {
                 message.channel.send(`Enjoy your ${role} role :D`);
+            }
+            if (role == secretRole) {
+                message.author.send(`Congratulations! You have obtained the Super Secret Role™! Telling other users how to isn't allowed, so don't do it :sunglasses:`);
+                message.delete(); 
             }
             //reset the role value
             var role = null; 
