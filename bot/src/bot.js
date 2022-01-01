@@ -128,7 +128,7 @@ let commands = {
                 msg.author.id == "730177830201196585") {
                 process.exit();
             } else {
-                msg.channel.send({"content": "You do not have permission to use that command <:madsire:919091868439040021>"});
+                msg.channel.send({"content": "You do not have permission to use that command <:madsire:925458037056098424>"});
             }
         }
     },
