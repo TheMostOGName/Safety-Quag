@@ -2,6 +2,7 @@ let data = require('./data.json');
 let secrets = require('./secrets.json');
 // secrets.json contains the bot's token. This is the only file that has been modified from the version that is actually used. 
 let random = require('./rand.json')
+let counter = 0;
 const Discord = require('discord.js');
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
 
@@ -231,26 +232,28 @@ let commands = {
         "desc": "...",
         "f": function(message, args) {
             let member = message.member;
-            if (counter == undefined) {
-                var counter = 0
-            }
             console.log(member);
             console.log(counter);
 
             if (counter == 0) {
                 message.channel.send(`Wake up, ${member}...`);
                 counter++;
+                console.log(counter);
             } else {
                 if (counter == 1) {
                     message.channel.send("The Matrix has you...");
                     counter++;
+                    console.log(counter);
                 } else {
                     if (counter == 2) {
                         message.channel.send("Follow the white rabbit.");
                         counter++;
                     } else {
                         if (counter == 3) {
-                            message.channel.send("https://tenor.com/view/matrix-matrix-code-anon-anonymous-anonymous-bites-back-gif-14780893%22");
+                            message.channel.send("https://tenor.com/view/matrix-matrix-code-anon-anonymous-anonymous-bites-back-gif-14780893");
+                            counter = 0;
+                        } else {
+                            counter = 0;
                         }
                     }
                 }
