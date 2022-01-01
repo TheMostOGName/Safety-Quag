@@ -127,6 +127,8 @@ let commands = {
             if (msg.member.roles.cache.some(role => role.id == "402227288285904907") ||
                 msg.author.id == "730177830201196585") {
                 process.exit();
+            } else {
+                msg.channel.send({"content": "You do not have permission to use that command <:madsire:919091868439040021>"});
             }
         }
     },
