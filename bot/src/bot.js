@@ -177,6 +177,9 @@ let commands = {
             }
             //give the role
             member.roles.add(role).catch(console.error);
+            if (role != null) {
+                message.channel.send(`Enjoy your ${role} role :D`);
+            }
             //reset the role value
             var role = null; 
             console.log(role);
@@ -222,6 +225,35 @@ let commands = {
                 var role = null; 
                 console.log(role);
         }   
+    },
+
+    "hack": {
+        "desc": "hack",
+        "f": function(message, args) {
+            let member = message.member;
+            let counter = 0
+            console.log(member);
+            console.log(counter);
+
+            if (counter == 0) {
+                message.channel.send(`Wake up, ${member}...`);
+                counter++;
+            } else {
+                if (counter == 1) {
+                    message.channel.send("The Matrix has you...");
+                    counter++;
+                } else {
+                    if (counter == 2) {
+                        message.channel.send("Follow the white rabbit.");
+                        counter++;
+                    } else {
+                        if (counter == 3) {
+                            message.channel.send("https://tenor.com/view/matrix-matrix-code-anon-anonymous-anonymous-bites-back-gif-14780893%22");
+                        }
+                    }
+                }
+            }
+        }
     }
 } 
 
