@@ -125,8 +125,7 @@ let commands = {
     "BOFH": {
         "desc": "The Bastard Operator From Hell",
         "f": function(message, args) {
-            console.log(random);
-            message.channel.send(random.bofh[Math.floor((Math.random() * random.bofh.length))])
+            message.channel.send(random.BOFH[Math.floor((Math.random() * random.BOFH.length))])
         }
 
     },
