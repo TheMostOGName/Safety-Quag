@@ -283,6 +283,8 @@ let commands = {
                 } else {
                     var userinput = input;
                 }
+                console.log(userinput); 
+                console.log(args);
 
 
                 var eliza = new ElizaBot();
