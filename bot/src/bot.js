@@ -122,6 +122,14 @@ let commands = {
         }
 
     },
+    "BOFH": {
+        "desc": "The Bastard Operator From Hell",
+        "f": function(message, args) {
+            console.log(random);
+            message.channel.send(random.bofh[Math.floor((Math.random() * random.bofh.length))])
+        }
+
+    },
 
     "exit": {
         "desc": "Closes bot, staff only",
