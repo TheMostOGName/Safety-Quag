@@ -247,11 +247,11 @@ let commands = {
             if (counter == 0) {
                 if (nani = 69) {
                     message.channel.send(`Keananu Reaves`)
-                }
+                } else {
                 message.channel.send(`Wake up, ${member}...`);
                 counter++;
                 console.log(counter);
-            } else {
+            }} else {
                 if (counter == 1) {
                     message.channel.send("The Matrix has you...");
                     counter++;
