@@ -287,7 +287,7 @@ let commands = {
                 console.log(args);
 
 
-                var eliza = new ElizaBot();
+                var eliza = new elizabot.ElizaBot();
                 var elizaLines = new Array();
 
                 var displayCols = 60;
