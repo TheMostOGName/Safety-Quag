@@ -277,23 +277,24 @@ let commands = {
     "eliza": {
         "desc": "Eliza is the world's first chatbot, created in 1965!",
         "f": function(message, args) {
-            args.forEach(getInput); 
-            function getInput(input) {
-                if (userinput != undefined) {
-                    var userinput = `${userinput} ${input}`;
-                    console.log(userinput);
-                } else {
-                    var userinput = input;
-                }
-                if (args[1] = undefined) {
-                    let start = elizabot.start(); 
-                    message.channel.send(start);   
-                    console.log(start); 
-                } else {
-                    let reply = elizabot.reply(userinput); 
-                    message.channel.send(reply); 
-                    console.log(reply);
-                }
+            // args.forEach(getInput); 
+            // function getInput(input) {
+            //     if (userinput != undefined) {
+            //         var userinput = `${userinput} ${input}`;
+            //         console.log(userinput);
+            //     } else {
+            //         var userinput = input;
+            //     }
+
+            var userinput = args.toString();
+            if (args[1] = undefined) {
+                let start = elizabot.start(); 
+                message.channel.send(start);   
+                console.log(start); 
+            } else {
+                let reply = elizabot.reply(userinput); 
+                message.channel.send(reply); 
+                console.log(reply);
             }
         }
     }
