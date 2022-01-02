@@ -86,7 +86,7 @@
 		"HTML"
 	],
     "BOFH": [
-        ["clock speed",
+            "clock speed",
             "solar flares",
             "electromagnetic radiation from satellite debris",
             "static from nylon underwear",
@@ -552,6 +552,5 @@
             "Leap second overloaded RHEL6 servers",
             "DNS server drank too much and had a hiccup",
             "Your machine had the fuses in backwards."
-            ]
-    ]        
+            ]        
 }
