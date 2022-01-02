@@ -243,9 +243,10 @@ let commands = {
             let member = message.member;
             console.log(member);
             console.log(counter);
+            console.log(nani);
 
             if (counter == 0) {
-                if (nani = 69) {
+                if (nani == 69) {
                     message.channel.send(`Keananu Reaves`)
                 } else {
                 message.channel.send(`Wake up, ${member}...`);
