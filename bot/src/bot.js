@@ -37,7 +37,7 @@ let commands = {
 
             cmds.sort((a, b) => a[0].localeCompare(b[0]))
 
-            let out = `Type \`${data.prefix}cmd <command>\` for help on a specific command, & \`${data.prefix}help <number>\` to go a specific page. \n\`\`\`\n`;
+            let out = `Type \`${data.prefix[0]}cmd <command>\` for help on a specific command, & \`${data.prefix[0]}help <number>\` to go a specific page. \n\`\`\`\n`;
             let num = 0;
             let i   = 0;
             cmds.forEach(cmd => {
@@ -326,9 +326,10 @@ client.on('messageCreate', message => {
         }
     
         if (message.author.bot) return;
-        if (!message.content.startsWith(data.prefix)) return;
+        if (!message.content.startsWith(data.prefix[0]) && !message.content.startsWith(data.prefix[1])) return;
+
         
-        if (!data.allowed_channels.includes(message.channel.id)) {
+        if (!data.allowed_channels.includes(message.channel.id) && !message.content.startsWith(data.prefix[1])) {
             message.react("<:wut:925458036733145180>");
             return;
         }
@@ -354,15 +355,14 @@ client.on('messageCreate', message => {
         if (t != "") args.push(t);
     
         console.log(args);
-        if (commands[args[0]] === undefined) {
+        if (commands[args[0]] === undefined && message.content.startsWith(data.prefix[1])) {
             message.channel.send("<:wut:925458036733145180> that isn't a command (type `help` for help)");
             return;
         }
-    
         try {
             commands[args[0]].f(message, args);
         } catch (e) {
-            message.channel.send(`oh god something broke: <:quagfire:925458036762484766>\n\`\`\`diff\n+ Unhandled exception while executing “${args[0]}”: \n-    ${e.toString().replace(/\n/g, "\n- ")}\`\`\`\n ${args[0] != "error" ? "<:madsire:925458037056098424> <@730177830201196585> pls fix" : ""}`)
+            client.channels.cache.get(data.bugreport_channel).send(`oh god something broke: <:quagfire:925458036762484766>\n\`\`\`diff\n+ Unhandled exception while executing “${args[0]}”: \n-    ${e.toString().replace(/\n/g, "\n- ")}\`\`\`\n ${args[0] != "error" ? "<:madsire:925458037056098424> <@730177830201196585> pls fix" : ""}`)
         }
     } catch (e) {
         client.channels.cache.get(data.bugreport_channel).send(`oh god something broke: <:quagfire:925458036762484766>\n\`\`\`diff\n+ Unhandled exception while executing “events.messageCreate”: \n-    ${e.toString().replace(/\n/g, "\n- ")}\`\`\`\n     <:madsire:925458037056098424> <@730177830201196585> pls fix`);
