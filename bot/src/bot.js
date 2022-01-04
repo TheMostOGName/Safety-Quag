@@ -330,7 +330,7 @@ client.on('messageCreate', message => {
 
         
         if (!data.allowed_channels.includes(message.channel.id) && message.content.startsWith(data.prefix[0])) {
-            message.react("<:wut:925458036733145180>");
+            if(message.content != data.prefix[0]) message.react("<:wut:925458036733145180>");
             return;
         }
         if (!data.allowed_channels.includes(message.channel.id) && message.content.startsWith(data.prefix[1])) {
