@@ -329,8 +329,12 @@ client.on('messageCreate', message => {
         if (!message.content.startsWith(data.prefix[0]) && !message.content.startsWith(data.prefix[1])) return;
 
         
-        if (!data.allowed_channels.includes(message.channel.id) && !message.content.startsWith(data.prefix[1])) {
+        if (!data.allowed_channels.includes(message.channel.id) && message.content.startsWith(data.prefix[0])) {
             message.react("<:wut:925458036733145180>");
+            return;
+        }
+        if (!data.allowed_channels.includes(message.channel.id) && message.content.startsWith(data.prefix[1])) {
+        //     message.react("<:wut:925458036733145180>");
             return;
         }
     
@@ -355,10 +359,15 @@ client.on('messageCreate', message => {
         if (t != "") args.push(t);
     
         console.log(args);
-        if (commands[args[0]] === undefined && message.content.startsWith(data.prefix[1])) {
+        if (commands[args[0]] === undefined && message.content.startsWith(data.prefix[0])) {
             message.channel.send("<:wut:925458036733145180> that isn't a command (type `help` for help)");
             return;
-        }
+        } 
+        // if (commands[args[0]] === undefined && message.content.startsWith(data.prefix[1])) {
+            // message.channel.send("<:wut:925458036733145180> that isn't a command (type `help` for help)");
+            // return;
+        // }        
+
         try {
             commands[args[0]].f(message, args);
         } catch (e) {
