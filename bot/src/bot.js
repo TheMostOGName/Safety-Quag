@@ -324,21 +324,21 @@ client.on('messageCreate', message => {
             message.content.indexOf("<@919831853014339584>") != -1) {
             message.react("<:ping:919094079302799373>");
         }
+
+        // Allow ` to be used as a prefix, also would work if a message begins and ends with `
+        let content = msg.content;
+        if (content.startswith('`') && content.endswith('`')) content = content.slice(0, -1);
     
         if (message.author.bot) return;
-        if (!message.content.startsWith(data.prefix[0]) && !message.content.startsWith(data.prefix[1])) return;
+        if (!content.startsWith(data.prefix[0])) return;
 
         
         if (!data.allowed_channels.includes(message.channel.id) && message.content.startsWith(data.prefix[0])) {
             if(message.content != data.prefix[0]) message.react("<:wut:925458036733145180>") .catch(e => {console.log(e)});
             return;
         }
-        if (!data.allowed_channels.includes(message.channel.id) && message.content.startsWith(data.prefix[1])) {
-        //     message.react("<:wut:925458036733145180>");
-            return;
-        }
     
-        let content = message.content.substring(1, message.content.length);
+        //args system
         let args = [];
         let i = 0;
         let t = "";
@@ -357,16 +357,14 @@ client.on('messageCreate', message => {
             i++;
         }
         if (t != "") args.push(t);
+        // no case sensativity
+        args[0] = args[0].toLowerCase()
     
         console.log(args);
-        if (commands[args[0]] === undefined && message.content.startsWith(data.prefix[0])) {
+        if (commands[args[0]] === undefined && content.startsWith(data.prefix[0])) {
             message.channel.send("<:wut:925458036733145180> that isn't a command (type `help` for help)");
             return;
-        } 
-        // if (commands[args[0]] === undefined && message.content.startsWith(data.prefix[1])) {
-            // message.channel.send("<:wut:925458036733145180> that isn't a command (type `help` for help)");
-            // return;
-        // }        
+        }  
 
         try {
             commands[args[0]].f(message, args);
