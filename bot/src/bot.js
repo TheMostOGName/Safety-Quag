@@ -326,7 +326,7 @@ client.on('messageCreate', message => {
         }
 
         // Allow ` to be used as a prefix, also would work if a message begins and ends with `
-        let content = msg.content;
+        let content = message.content;
         if (content.startswith('`') && content.endswith('`')) content = content.slice(0, -1);
     
         if (message.author.bot) return;
