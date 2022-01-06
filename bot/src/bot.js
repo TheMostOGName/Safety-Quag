@@ -313,32 +313,21 @@ function error(e) {
 
 //Error messages + other QoL
 client.on('messageCreate', message => {
-    try {
-        // Code that would auto-delete scam links. Not going to be used, but I wanted to add it here because it might be useful to have.     
-        // data.scamlinks.forEach(link => {
-        // if (message.content.includes(link)) {
-        //     message.delete();
-        //     return;
-        //     }});
+    try {        
         if (message.content.indexOf("<@!919831853014339584>") != -1 ||
             message.content.indexOf("<@919831853014339584>") != -1) {
             message.react("<:ping:919094079302799373>");
         }
-
-        // Allow ` to be used as a prefix, also would work if a message begins and ends with `
-        let content = message.content;
-        if (content.startswith('`') && content.endswith('`')) content = content.slice(0, -1);
     
         if (message.author.bot) return;
-        if (!content.startsWith(data.prefix[0])) return;
-
+        if (!message.content.startsWith(data.prefix)) return;
         
-        if (!data.allowed_channels.includes(message.channel.id) && message.content.startsWith(data.prefix[0])) {
-            if(message.content != data.prefix[0]) message.react("<:wut:925458036733145180>") .catch(e => {console.log(e)});
+        if (!data.allowed_channels.includes(message.channel.id)) {
+            message.react("<:wut:925458036733145180>");
             return;
         }
     
-        //args system
+        let content = message.content.substring(1, message.content.length);
         let args = [];
         let i = 0;
         let t = "";
@@ -357,19 +346,17 @@ client.on('messageCreate', message => {
             i++;
         }
         if (t != "") args.push(t);
-        // no case sensativity
-        args[0] = args[0].toLowerCase()
     
         console.log(args);
-        if (commands[args[0]] === undefined && content.startsWith(data.prefix[0])) {
+        if (commands[args[0]] === undefined) {
             message.channel.send("<:wut:925458036733145180> that isn't a command (type `help` for help)");
             return;
-        }  
-
+        }
+    
         try {
             commands[args[0]].f(message, args);
         } catch (e) {
-            client.channels.cache.get(data.bugreport_channel).send(`oh god something broke: <:quagfire:925458036762484766>\n\`\`\`diff\n+ Unhandled exception while executing “${args[0]}”: \n-    ${e.toString().replace(/\n/g, "\n- ")}\`\`\`\n ${args[0] != "error" ? "<:madsire:925458037056098424> <@730177830201196585> pls fix" : ""}`)
+            message.channel.send(`oh god something broke: <:quagfire:925458036762484766>\n\`\`\`diff\n+ Unhandled exception while executing “${args[0]}”: \n-    ${e.toString().replace(/\n/g, "\n- ")}\`\`\`\n ${args[0] != "error" ? "<:madsire:925458037056098424> <@730177830201196585> pls fix" : ""}`)
         }
     } catch (e) {
         client.channels.cache.get(data.bugreport_channel).send(`oh god something broke: <:quagfire:925458036762484766>\n\`\`\`diff\n+ Unhandled exception while executing “events.messageCreate”: \n-    ${e.toString().replace(/\n/g, "\n- ")}\`\`\`\n     <:madsire:925458037056098424> <@730177830201196585> pls fix`);
