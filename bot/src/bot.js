@@ -182,6 +182,11 @@ let commands = {
             var check = null;
             }}}}}}};
 
+            if (args[1] == undefined) {
+                var role = "not null";
+                message.channel.send("Avaliable roles: Wooper, Quag, Sandshrew, Lotad, Huntail");
+            }
+
             if (role == null && check != "true") {
                 message.channel.send("Sorry, this is not a valid role.");
             }
@@ -190,7 +195,7 @@ let commands = {
             }
             //give the role
             member.roles.add(role).catch(console.error);
-            if (role != null && role != secretRole) {
+            if (role != null && role != secretRole && role != "not null") {
                 message.channel.send(`Enjoy your ${role} role :D`);
             }
             if (role == secretRole) {
@@ -304,6 +309,24 @@ let commands = {
                 console.log(reply);
             }
         }
+    },
+    "sign-paint": {
+        "desc": "Paint a sign!",
+        "f": function(message, args) {
+            let sign = random.signs[Math.floor((Math.random() * random.signs.length))];
+            console.log(sign);
+            sign = sign.split("~"); 
+            console.log(sign);
+
+            for (let i = 0; i < sign.length; i++) {
+                sign[i] = "" + sign[i] + "\n";
+            }
+
+            sign = sign.join("");
+            message.channel.send("<:sign:930580655358746664>");
+            message.channel.send(sign);
+            console.log(sign);
+        }
     }
 } 
 
@@ -313,7 +336,13 @@ function error(e) {
 
 //Error messages + other QoL
 client.on('messageCreate', message => {
-    try {        
+    try {
+        // Code that would auto-delete scam links. Not going to be used, but I wanted to add it here because it might be useful to have.     
+        // data.scamlinks.forEach(link => {
+        // if (message.content.includes(link)) {
+        //     message.delete();
+        //     return;
+        //     }});
         if (message.content.indexOf("<@!919831853014339584>") != -1 ||
             message.content.indexOf("<@919831853014339584>") != -1) {
             message.react("<:ping:919094079302799373>");
@@ -321,9 +350,10 @@ client.on('messageCreate', message => {
     
         if (message.author.bot) return;
         if (!message.content.startsWith(data.prefix)) return;
+
         
-        if (!data.allowed_channels.includes(message.channel.id)) {
-            message.react("<:wut:925458036733145180>");
+        if (!data.allowed_channels.includes(message.channel.id) && message.content.startsWith(data.prefix)) {
+            if(message.content != data.prefix[0]) message.react("<:wut:925458036733145180>") .catch(e => {console.log(e)});
             return;
         }
     
@@ -348,15 +378,15 @@ client.on('messageCreate', message => {
         if (t != "") args.push(t);
     
         console.log(args);
-        if (commands[args[0]] === undefined) {
+        if (commands[args[0]] === undefined && message.content.startsWith(data.prefix)) {
             message.channel.send("<:wut:925458036733145180> that isn't a command (type `help` for help)");
             return;
-        }
-    
+        } 
+
         try {
             commands[args[0]].f(message, args);
         } catch (e) {
-            message.channel.send(`oh god something broke: <:quagfire:925458036762484766>\n\`\`\`diff\n+ Unhandled exception while executing “${args[0]}”: \n-    ${e.toString().replace(/\n/g, "\n- ")}\`\`\`\n ${args[0] != "error" ? "<:madsire:925458037056098424> <@730177830201196585> pls fix" : ""}`)
+            client.channels.cache.get(data.bugreport_channel).send(`oh god something broke: <:quagfire:925458036762484766>\n\`\`\`diff\n+ Unhandled exception while executing “${args[0]}”: \n-    ${e.toString().replace(/\n/g, "\n- ")}\`\`\`\n ${args[0] != "error" ? "<:madsire:925458037056098424> <@730177830201196585> pls fix" : ""}`)
         }
     } catch (e) {
         client.channels.cache.get(data.bugreport_channel).send(`oh god something broke: <:quagfire:925458036762484766>\n\`\`\`diff\n+ Unhandled exception while executing “events.messageCreate”: \n-    ${e.toString().replace(/\n/g, "\n- ")}\`\`\`\n     <:madsire:925458037056098424> <@730177830201196585> pls fix`);
@@ -473,4 +503,4 @@ client.on('ready', () => {
 })
 
 client.login(secrets.token);
-// secrets contains the bot's token. This is the only file that has been modified from the version that is actually used. 
+// secrets contains the bot's token. This is the only file that has been modified from the version that is actually used.
