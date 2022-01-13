@@ -426,6 +426,15 @@ client.on('messageDelete', message => {
         console.log(Attach)
 
         if (Attach != {}) {
+            if (message.content == "") {
+                client.channels.cache.get(data.modlog_channel).send({
+                "embeds": [
+                    new Discord.MessageEmbed()
+                        .setTitle("Deleted message:")
+                        .addField("Info", `Author: <@${message.author.id}> (${message.author.id})`),           
+                ]
+            });
+        }
             client.channels.cache.get(data.modlog_channel).send(Attach);
         }
 
