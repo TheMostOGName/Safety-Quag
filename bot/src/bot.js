@@ -426,36 +426,40 @@ client.on('messageDelete', message => {
         console.log(Attach)
 
         if (Attach != {}) {
-            if (message.content == "") {
-                try {                    
-                    client.channels.cache.get(data.modlog_channel).send({
-                        "embeds": [
-                            new Discord.MessageEmbed()
-                                .setThumbnail(Attach !== undefined ? Attach : "")
-                                .setTitle("Deleted message:")
-                                .addField("Info", `Author: <@${message.author.id}> (${message.author.id})`),           
-                        ]
-                    });
-                } 
-                catch (e) {
-                    error(e);
-                }
-            } else {
-                try {   
-                    client.channels.cache.get(data.modlog_channel).send({
-                        "embeds": [
-                            new Discord.MessageEmbed()
-                                .setThumbnail(Attach !== undefined ? Attach : "")
-                                .setTitle("Deleted message:")
-                                .addField("Content", message.content, false)
-                                .addField("Info", `Author: <@${message.author.id}> (${message.author.id})`),           
-                        ]
-                    });
-                } catch (e) {
-                    error(e);
-                }
-            }
-        } 
+            client.channels.cache.get(data.modlog_channel).send(Attach);
+        }
+
+        // if (Attach != {}) {
+        //     if (message.content == "") {
+        //         try {                    
+        //             client.channels.cache.get(data.modlog_channel).send({
+        //                 "embeds": [
+        //                     new Discord.MessageEmbed()
+        //                         .setThumbnail(Attach !== undefined ? Attach : "")
+        //                         .setTitle("Deleted message:")
+        //                         .addField("Info", `Author: <@${message.author.id}> (${message.author.id})`),           
+        //                 ]
+        //             });
+        //         } 
+        //         catch (e) {
+        //             error(e);
+        //         }
+        //     } else {
+        //         try {   
+        //             client.channels.cache.get(data.modlog_channel).send({
+        //                 "embeds": [
+        //                     new Discord.MessageEmbed()
+        //                         .setThumbnail(Attach !== undefined ? Attach : "")
+        //                         .setTitle("Deleted message:")
+        //                         .addField("Content", message.content, false)
+        //                         .addField("Info", `Author: <@${message.author.id}> (${message.author.id})`),           
+        //                 ]
+        //             });
+        //         } catch (e) {
+        //             error(e);
+        //         }
+        //     }
+        // } 
     });
 });
 
