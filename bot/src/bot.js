@@ -5,7 +5,8 @@ var elizabot = require('./elizabot.js');
 let random = require('./rand.json')
 let counter = 0;
 const Discord = require('discord.js');
-const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
+const { Client, Intents } = require('discord.js');
+const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES", Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS] });
 
 //A list of all the commands, their descriptions, what to do when someone runs them, ect. 
 let commands = {
@@ -241,7 +242,7 @@ let commands = {
                 if (role == null) {
                     message.channel.send("Sorry, this is not a valid role.");
                 }
-                //give the role
+                //remove the role
                 member.roles.remove(role).catch(console.error);
                 //reset the role value
                 var role = null; 
@@ -500,6 +501,87 @@ client.on('messageUpdate', (oldmessage, newmessage) => {
         });
     } catch (e) {
         error(e);
+    }
+});
+
+//Automatically give users roles when they join
+client.on('guildMemberAdd', (member) => {
+    
+    console.log(member);
+    console.log(member.user.id);
+
+    //Icon Roles
+    let wooper = member.guild.roles.cache.get("904105130151006269");
+    let quag = member.guild.roles.cache.get("904634145899151410");
+    let sandshrew = member.guild.roles.cache.get("893012538705453087");
+    let lotad = member.guild.roles.cache.get("904634350455382037");
+    let huntail = member.guild.roles.cache.get("904634480579452928");
+    let samAsh = member.guild.roles.cache.get("904624041464332318");
+    let tux = member.guild.roles.cache.get("906476545047162922");
+    //Pronoun Roles
+    let theyPronoun = member.guild.roles.cache.get("905936402485743617");
+    let shePronoun = member.guild.roles.cache.get("905936403081351218");
+    let hePronoun = member.guild.roles.cache.get("905936403504959550");
+    let anyPronoun = member.guild.roles.cache.get("905940046681616394");
+    let otherPronoun = member.guild.roles.cache.get("905940088943431692");
+    //Career Roles
+    let artist = member.guild.roles.cache.get("789283502616608789");
+    let musician = member.guild.roles.cache.get("789422464199426068");
+    let developer = member.guild.roles.cache.get("789422066003869737");
+    //Notif Roles
+    let streamNotifs = member.guild.roles.cache.get("907732863162658837");
+    let videoNotifs = member.guild.roles.cache.get("907732863162658837");
+    //Misc Roles
+    let trusted = member.guild.roles.cache.get("776519777753366538");
+    let vip = member.guild.roles.cache.get("568310052968988672");
+    let archiveAccess = member.guild.roles.cache.get("895566435542241281");
+
+    //Give roles on join for each person. I probably could have made a database for it but idk how to connect database data to discord bots
+
+    //Mana/Kat#4301
+    if (member.user.id == "252901601658929152") {
+        member.roles.add(trusted).catch(console.error);
+        member.roles.add(shePronoun).catch(console.error);
+        member.roles.add(theyPronoun).catch(console.error);
+        member.roles.add(quag).catch(console.error);
+        member.roles.add(streamNotifs).catch(console.error);
+    }
+    //Nokcho1202#3007
+    if(member.user.id == "804554476333432872") {
+        member.roles.add(quag).catch(console.error);
+        member.roles.add(trusted).catch(console.error);
+        member.roles.add(streamNotifs).catch(console.error);
+        member.roles.add(archiveAccess).catch(console.error);
+        member.roles.add(anyPronoun).catch(console.error);
+    }
+    //cori#7506 
+    if (member.user.id == "598287462418219191") { 
+        member.roles.add(trusted).catch(console.error); 
+        member.roles.add(shePronoun).catch(console.error);
+        member.roles.add(lotad).catch(console.error);
+        member.roles.add(archiveAccess).catch(console.error); 
+        member.roles.add(artist).catch(console.error); 
+    }
+    //MaddyDaSywveon#0700
+    if (member.user.id == "706114943598198824") {
+        member.roles.add(trusted).catch(console.error);
+        member.roles.add(shePronoun).catch(console.error);
+        member.roles.add(otherPronoun).catch(console.error);
+        member.roles.add(developer).catch(console.error);
+        member.roles.add(wooper).catch(console.error);
+        member.roles.add(archiveAccess).catch(console.error);
+    }
+    //The Real Slim Shady#0604
+    if (member.user.id == "386850197982019584") {
+        member.roles.add(trusted).catch(console.error);
+        member.roles.add(musician).catch(console.error);
+    }
+    //Kenorbs#4955
+    if (member.user.id == "730177830201196585") {
+        member.roles.add(trusted).catch(console.error);
+        member.roles.add(theyPronoun).catch(console.error);
+        member.roles.add(developer).catch(console.error);
+        member.roles.add(musician).catch(console.error);
     }
 });
 
