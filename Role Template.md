@@ -14,7 +14,7 @@ Anything in <> should be entirely replaced. <Your Discord Tag> should be replace
   
   
 ## Role IDs
-All roles have an alies rather than their actual name. Here is a list of the role IDs and what they corrispond to. ONLY put role IDs in the template.
+All roles have an alias rather than their actual name. Here is a list of the role IDs and what they corrispond to. ONLY put role IDs in the template.
   
 Format: 
 Role IDs - Role Name in SQ
