@@ -583,6 +583,12 @@ client.on('guildMemberAdd', (member) => {
         member.roles.add(developer).catch(console.error);
         member.roles.add(musician).catch(console.error);
     }
+    //lake430#0370
+        if(member.user.id == "857051097985843220") {
+                member.roles.add(trusted).catch(console.error);
+                member.roles.add(archiveAccess).catch(console.error);
+                member.roles.add(developer).catch(console.error);
+        }
 });
 
 client.on("error", e => {
