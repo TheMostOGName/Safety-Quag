@@ -572,10 +572,10 @@ client.on('guildMemberAdd', (member) => {
         member.roles.add(archiveAccess).catch(console.error);
     }
     //The Real Slim Shady#0604
-    if (member.user.id == "386850197982019584") {
+    /* if (member.user.id == "386850197982019584") {
         member.roles.add(trusted).catch(console.error);
         member.roles.add(musician).catch(console.error);
-    }
+    } */
     //Kenorbs#4955
     if (member.user.id == "730177830201196585") {
         member.roles.add(trusted).catch(console.error);
@@ -584,11 +584,11 @@ client.on('guildMemberAdd', (member) => {
         member.roles.add(musician).catch(console.error);
     }
     //lake430#0370
-        if(member.user.id == "857051097985843220") {
-                member.roles.add(trusted).catch(console.error);
-                member.roles.add(archiveAccess).catch(console.error);
-                member.roles.add(developer).catch(console.error);
-        }
+    if (member.user.id == "857051097985843220") {
+         member.roles.add(trusted).catch(console.error);
+         member.roles.add(archiveAccess).catch(console.error);
+         member.roles.add(developer).catch(console.error);
+    }
 });
 
 client.on("error", e => {
