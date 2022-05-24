@@ -350,6 +350,28 @@ client.on('messageCreate', message => {
         }
     
         if (message.author.bot) return;
+
+        //Joke thing, I probably can do this without four match vars and like three if statements but I cannot be bothered at this point
+        const match1 = /\bI'm\b/.test(message.content);
+        const match2 = /\bim\b/.test(message.content);
+        const match3 = /\bi'm\b/.test(message.content);
+        const match4 = /\bIm\b/.test(message.content);
+        let dadRand = Math.floor(Math.random() * 10);
+        console.log(dadRand);
+        if (dadRand < 2) {
+            if (match1 == true || match3 == true) {
+                let capture = message.content.substring(message.content.indexOf("/\bI'm\b") + 5);
+                console.log(capture);
+                message.channel.send(`${message.author} Hi ${capture}, I'm Safety Quag!`);
+            } else {
+                if (match2 == true || match4 == true) {
+                    let capture = message.content.substring(message.content.indexOf("/\bim\b") + 4);
+                    console.log(capture);
+                    message.channel.send(`${message.author} Hi ${capture}, I'm Safety Quag!`);
+                }
+            }
+        }
+
         if (!message.content.startsWith(data.prefix)) return;
 
         
@@ -582,13 +604,13 @@ client.on('guildMemberAdd', (member) => {
         member.roles.add(theyPronoun).catch(console.error);
         member.roles.add(developer).catch(console.error);
         member.roles.add(musician).catch(console.error);
-    }
+    } 
     //lake430#0370
-    if (member.user.id == "857051097985843220") {
-         member.roles.add(trusted).catch(console.error);
-         member.roles.add(archiveAccess).catch(console.error);
-         member.roles.add(developer).catch(console.error);
-    }
+        if(member.user.id == "857051097985843220") {
+                member.roles.add(trusted).catch(console.error);
+                member.roles.add(archiveAccess).catch(console.error);
+                member.roles.add(developer).catch(console.error);
+        }
 });
 
 client.on("error", e => {
