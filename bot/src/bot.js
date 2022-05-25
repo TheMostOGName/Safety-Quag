@@ -357,8 +357,7 @@ client.on('messageCreate', message => {
         const match3 = /\bi'm\b/.test(message.content);
         const match4 = /\bIm\b/.test(message.content);
         let dadRand = Math.floor(Math.random() * 10);
-        console.log(dadRand);
-        if (dadRand < 2) {
+        if (dadRand < 2 && data.allowed_channels.includes(message.channel.id)) {
             if (match1 == true || match3 == true) {
                 let capture = message.content.substring(message.content.indexOf("/\bI'm\b") + 5);
                 console.log(capture);
