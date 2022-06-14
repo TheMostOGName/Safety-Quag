@@ -417,22 +417,28 @@ client.on('messageCreate', message => {
     
         if (message.author.bot) return;
 
-        //Joke thing, I probably can do this without four match vars and like three if statements but I cannot be bothered at this point
+        //Joke thing, I probably can do this without four match vars and like three (now five) if statements but I cannot be bothered at this point
         const match1 = /\bI'm\b/.test(message.content);
         const match2 = /\bim\b/.test(message.content);
         const match3 = /\bi'm\b/.test(message.content);
         const match4 = /\bIm\b/.test(message.content);
-        let dadRand = Math.floor(Math.random() * 10);
+        let dadRand = Math.floor(Math.random() * 11);
         if (dadRand < 2 && data.allowed_channels.includes(message.channel.id)) {
             if (match1 == true || match3 == true) {
-                let capture = message.content.substring(message.content.indexOf("/\bI'm\b") + 5);
+                const capture = message.content.split(/\bI'm\b/i) //substring(message.content.indexOf("/\bI'm\b") + 5);
                 console.log(capture);
-                message.channel.send(`${message.author} Hi ${capture}, I'm Safety Quag!`);
+                console.log(capture[1]);
+                const textCapture = capture[1].substring(1);
+                console.log|(textCapture);
+                if (textCapture != "") message.channel.send(`${message.author} Hi ${textCapture}, I'm Safety Quag!`);
             } else {
                 if (match2 == true || match4 == true) {
-                    let capture = message.content.substring(message.content.indexOf("/\bim\b") + 4);
+                    const capture = message.content.split(/\bIm\b/i) //substring(message.content.indexOf("/\bim\b") + 4);
                     console.log(capture);
-                    message.channel.send(`${message.author} Hi ${capture}, I'm Safety Quag!`);
+                    console.log(capture[1]);
+                    const textCapture = capture[1].substring(1);
+                    console.log|(textCapture);
+                    if (textCapture != "") message.channel.send(`${message.author} Hi ${textCapture}, I'm Safety Quag! Also not using the ' character in "I'm" is kinda cringe :skull:`);
                 }
             }
         }
