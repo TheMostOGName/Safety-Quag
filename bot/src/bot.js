@@ -7,6 +7,7 @@ let counter = 0;
 const Discord = require('discord.js');
 const { Client, Intents } = require('discord.js');
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES", Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS] });
+const https = require('https');
 
 //A list of all the commands, their descriptions, what to do when someone runs them, ect. 
 let commands = {
@@ -116,12 +117,77 @@ let commands = {
     },
 
     "joke": {
-        "desc": "(you)",
-        "f": function(message, args) {
-            console.log(random);
-            message.channel.send(random.jokes[Math.floor((Math.random() * random.jokes.length))])
-        }
+        "desc": "(you) Try Programming, Misc, or Pun!",
+        "f": function (message, args) {
+            // message.channel.send(random.jokes[Math.floor((Math.random() * random.jokes.length))])
+            let rick = Math.floor(Math.random() * 100);
+            console.log(args[1]);
+            function getJoke(url) {
+                https.get(url, (resp) => {
+                    let data = '';
+                    console.log(data);
+                    // A chunk of data has been received.
+                    resp.on('data', (chunk) => {
+                        data += chunk;
+                    });
 
+                    // The whole response has been received. Print out the result.
+                    resp.on('end', () => {
+                        console.log(JSON.parse(data).category);
+                        jokeData = JSON.parse(data).joke;
+                        console.log(jokeData);
+                        message.channel.send(jokeData);
+                    });
+
+                }).on("error", (err) => {
+                    console.log("Error: " + err.message);
+                });
+            }
+
+
+            if (rick = 0) {
+                message.channel.send("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+            } else {
+                if (args[1] != undefined) {
+                    if (args[1] == "Programming" || args[1] == "Misc" || args[1] == "Pun") {
+                        getJoke(`https://v2.jokeapi.dev/joke/${args[1]}?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&safe-mode&type=single`);
+                    } else {
+                        message.channel.send("This is not a valid joke type! Try Programming, Misc, or Pun (case-sensative) instead.");
+                    }
+                } else {
+                    getJoke(`https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&safe-mode&type=single`);
+                }
+                // if (args == "Programming" || "Misc" || "Pun") {
+                //     getJoke(`https://v2.jokeapi.dev/joke/${args[1]}?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&safe-mode&type=single`);
+
+                // } else {
+                //     if (args[1] != undefined) {
+                //         message.channel.send("This is not a valid joke type! Try Programming, Misc, or Pun (case-sensative) instead.");
+                //     } else {
+                //         getJoke(`https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&safe-mode&type=single`);
+                //     }
+                // }
+            
+                // https.get('https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&safe-mode&type=single', (resp) => {
+                //     let data = '';
+                //     console.log(data);
+                //     // A chunk of data has been received.
+                //     resp.on('data', (chunk) => {
+                //         data += chunk;
+                //     });
+
+                //     // The whole response has been received. Print out the result.
+                //     resp.on('end', () => {
+                //         console.log(JSON.parse(data).category);
+                //         jokeData = JSON.parse(data).joke;
+                //         console.log(jokeData);
+                //         message.channel.send(jokeData);
+                //     });
+
+                // }).on("error", (err) => {
+                //     console.log("Error: " + err.message);
+                // });
+            }}
     },
     "BOFH": {
         "desc": "The Bastard Operator From Hell",
